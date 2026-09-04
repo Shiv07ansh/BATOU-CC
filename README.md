@@ -207,7 +207,7 @@ BATOU-CC currently implements the following end-to-end pipeline:
              │
              ▼
 ┌──────────────────────────┐
-│   Optimization Passes   │
+│   Optimization Passes    │
 │                          │
 │  • CONV2D + RELU Fusion  │
 │  • Tensor size analysis  │
@@ -516,7 +516,7 @@ toward:
 ```text
 Model
   ↓
-       AOT COMPILATION
+AOT COMPILATION
   ↓
 Optimized Static C
   ↓
