@@ -531,7 +531,7 @@ Deterministic Inference
 
 **Version:** `v0.1.0-alpha`
 
-**Status:** 🚧 Active Development
+**Status:** Active Development
 
 BATOU-CC currently demonstrates the complete **graph ingestion → optimization → static memory planning → C code generation → compilation → inference** pipeline.
 
