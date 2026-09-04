@@ -12,13 +12,15 @@ using json = nlohmann::json;
 // -----------------------------------------------------------------------------
 // 1. IR Data Structures
 // -----------------------------------------------------------------------------
-enum class OpType {
+
+//commented because already declared in compiler.hpp included above
+/*enum class OpType {
     CONV2D,
     RELU,
     MAXPOOL2D,
     DENSE,
     FUSED_CONV2D_RELU
-};
+};*/
 
 OpType string_to_op(const std::string& str) {
     if (str == "CONV2D")    return OpType::CONV2D;
@@ -39,7 +41,8 @@ std::string op_to_string(OpType op) {
     }
 }
 
-struct LayerNode {
+//commented because already declared in compiler.hpp included above
+/*struct LayerNode {
     std::string name;
     OpType type;
     
@@ -52,7 +55,7 @@ struct LayerNode {
     size_t get_output_size_bytes() const {
         return static_cast<size_t>(out_h * out_w * out_c);
     }
-};
+};*/
 
 // -----------------------------------------------------------------------------
 // 2. Neural Network Compiler
