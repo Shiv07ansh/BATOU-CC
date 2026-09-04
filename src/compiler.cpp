@@ -4,6 +4,8 @@
 #include <fstream>
 #include <algorithm>
 #include "json.hpp" // Header-only JSON library
+#include <filesystem>
+#include "compiler.hpp"
 
 using json = nlohmann::json;
 
@@ -200,12 +202,28 @@ public:
 // 3. Driver Entry Point
 // -----------------------------------------------------------------------------
 int main(int argc, char* argv[]) {
-    std::string json_file = "model.json";
-    if (argc > 1) {
-        json_file = argv[1];
+    // Default fallback values
+    std::string json_file = "models/model.json";
+    std::string output_file = "generated/model_compiled.c";
+
+    // 1. Parse Command-Line Arguments
+    for (int i = 1; i < argc; ++i) {
+        std::string arg = argv[i];
+        if ((arg == "-o" || arg == "--output") && i + 1 < argc) {
+            output_file = argv[++i];
+        } else if (arg[0] != '-') {
+            json_file = arg;
+        }
     }
 
     try {
+        // 2. Ensure output directory exists (creates 'generated/' if missing)
+        std::filesystem::path out_path(output_file);
+        if (out_path.has_parent_path()) {
+            std::filesystem::create_directories(out_path.parent_path());
+        }
+
+        // 3. Run Compiler Passes
         TinyMLCompiler compiler;
 
         std::cout << "=== Reading Model Graph ===\n";
@@ -215,7 +233,9 @@ int main(int argc, char* argv[]) {
         compiler.pass_fuse_conv_relu();
         compiler.pass_allocate_static_memory();
 
-        compiler.emit_c_code("model_compiled.c");
+        // 4. Emit file to target path
+        compiler.emit_c_code(output_file);
+        std::cout << "Successfully generated " << output_file << "!\n";
 
     } catch (const std::exception& e) {
         std::cerr << "Compiler Error: " << e.what() << "\n";
