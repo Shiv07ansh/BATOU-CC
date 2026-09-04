@@ -1,0 +1,6 @@
+[
+  { "name": "conv1", "type": "CONV2D",   "in_h": 28, "in_w": 28, "in_c": 1, "out_h": 28, "out_w": 28, "out_c": 8 },
+  { "name": "relu1", "type": "RELU",     "in_h": 28, "in_w": 28, "in_c": 8, "out_h": 28, "out_w": 28, "out_c": 8 },
+  { "name": "pool1", "type": "MAXPOOL2D","in_h": 28, "in_w": 28, "in_c": 8, "out_h": 14, "out_w": 14, "out_c": 8 },
+  { "name": "fc1",   "type": "DENSE",    "in_h": 14, "in_w": 14, "in_c": 8, "out_h": 1,  "out_w": 1,  "out_c": 10 }
+]
