@@ -45,7 +45,7 @@ BATOU-CC transforms a high-level neural-network graph into a standalone, statica
                                       │
                                       ▼
                      ┌─────────────────────────────┐
-                     │        GCC / Clang           │
+                     │        GCC / Clang          │
                      │                             │
                      │  model_compiled.c           │
                      │  runtime/kernels.c          │
